@@ -42,7 +42,7 @@ const loginUser = asyncHandler(async (req, res) => {
     const {email, password} = req.body;
     if (!email || !password) {
         res.status(400);
-        throw new Error("All fields are mandatoryhhhh!");
+        throw new Error("All fields are mandatory!");
     }
     const user = await User.findOne({email: email});
     if (user && (await bcrypt.compare(password, user.password))) {
@@ -71,7 +71,7 @@ const loginUser = asyncHandler(async (req, res) => {
 //@route GET /api/users
 //@access private(only logged in user can get the current information)
 const currentUser = asyncHandler(async (req, res) => {
-    res.json({message: "Current user information"});
+    res.json(req.user);
 });
 
 module.exports = {
