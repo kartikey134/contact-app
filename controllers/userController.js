@@ -13,7 +13,7 @@ const registerUser = asyncHandler(async (req, res) => {
     }
     const userAvailable = await User.findOne({email});
     if (userAvailable) {
-        res.status(404);
+        res.status(400);
         throw new Error("User already registered!");
     } 
     // Hashed password
